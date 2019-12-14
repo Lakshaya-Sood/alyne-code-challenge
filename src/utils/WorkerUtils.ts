@@ -1,19 +1,18 @@
 import { User } from '../typings/clients/UserClient';
 import { Record } from '../typings/clients/RecordClient';
 import { LogData } from '../typings/clients/StorageClients';
-import { TUserObj, TRecordObj, TLogObj, WorkerTypes } from '../typings/Worker';
 
 import UserClient from '../clients/UserClient';
 import RecordClient from '../clients/RecordClient';
 import { LocalStorageClient, RemoteStorageClient } from '../clients/StorageClients';
 
-const workForuser = async (obj: TUserObj) => {
+const _workForuser = async (obj: any) => {
     let { id } = obj;
     let user: User = await UserClient.getUser(id)
     return user
 }
 
-const workForRecord = async (obj: TRecordObj) => {
+const _workForRecord = async (obj: any) => {
     let record: Record = {
         name: obj.name,
         createdDate: obj.createdDate,
@@ -22,7 +21,7 @@ const workForRecord = async (obj: TRecordObj) => {
     return await RecordClient.createRecord(record)
 }
 
-const workForLog = async (obj: TLogObj) => {
+const _workForLog = async (obj: any) => {
     if (obj.allowWrite) {
         let data: LogData = {
             key: obj.name,
@@ -36,15 +35,12 @@ const workForLog = async (obj: TLogObj) => {
     }
 }
 
-export const workImplementationFor = (type: WorkerTypes) => {
-    switch (type) {
-        case 'user':
-            return workForuser
-        case 'record':
-            return workForRecord
-        case 'log':
-            return workForLog
-        default:
-            throw new Error(`Work implementation for type ${type} not present`);
+const WorkerUtils = {
+    getWorkImplementation: {
+        'user': _workForuser,
+        'record': _workForRecord,
+        'log': _workForLog
     }
 }
+
+export default WorkerUtils
