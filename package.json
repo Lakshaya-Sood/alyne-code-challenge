@@ -2,7 +2,7 @@
   "name": "alyne-code-challenge",
   "version": "1.0.0",
   "description": "Code challenge to refactor challenge artifact",
-  "main": "index.js",
+  "main": "src/main.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel ./src/** --out-dir lib --extensions '.ts','.tsx'"
