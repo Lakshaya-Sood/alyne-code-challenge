@@ -18,7 +18,7 @@ npm run compile
 ### Builds src into lib folder
 
 ![Codebase Documentaion Screenshot](./docs/typedocs.png)
-### See FE Documentation
+### See Code Documentation
 ```
 Open file <root>/docs/index.html in Web  Browser
 ```
